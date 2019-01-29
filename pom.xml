@@ -15,6 +15,8 @@
         <maven.compiler.source>${java.version}</maven.compiler.source>
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <junit.version>5.3.2</junit.version>
+        <!--<skipTests>true</skipTests>-->
+        <!--<skipITs>true</skipITs>-->
     </properties>
 
     <dependencies>
@@ -33,6 +35,13 @@
     </dependencies>
 
     <build>
+        <extensions>
+            <extension>
+                <groupId>io.packagecloud.maven.wagon</groupId>
+                <artifactId>maven-packagecloud-wagon</artifactId>
+                <version>0.0.6</version>
+            </extension>
+        </extensions>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -146,6 +155,18 @@
             </plugin>
         </plugins>
     </build>
+
+    <!--see .m2/settings.xml-->
+    <distributionManagement>
+        <repository>
+            <id>packagecloud.release</id>
+            <url>packagecloud+https://packagecloud.io/jakvra/release</url>
+        </repository>
+        <snapshotRepository>
+            <id>packagecloud.snapshot</id>
+            <url>packagecloud+https://packagecloud.io/jakvra/snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <reporting>
         <plugins>
